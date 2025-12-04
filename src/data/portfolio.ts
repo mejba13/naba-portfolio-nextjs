@@ -306,7 +306,8 @@ export const testimonials = [
     relationship: 'BUET Senior & Colleague',
     content: 'Naba was my department junior at BUET. He is very punctual about what he is doing. Very passionate about his career. He is a team player, during the BSc period we worked together to arrange different types of programs on the campus. Wish him a very bright future!',
     date: 'July 28, 2020',
-    avatar: null,
+    avatar: '/images/Ashibul Hussain.jpeg',
+    linkedin: 'https://www.linkedin.com/in/ashibulhussain/',
   },
   {
     id: 2,
@@ -316,7 +317,8 @@ export const testimonials = [
     relationship: 'Worked together at Rahimafrooz',
     content: 'I would recommend Mr. Rabiul as one of the most prodigious professional in supply chain arena. His leadership, team work, quick learning capability, attitude and goal centered approach always distinguish himself from others.',
     date: 'March 2, 2020',
-    avatar: null,
+    avatar: '/images/Ashraful Alam Nayon.jpeg',
+    linkedin: 'https://www.linkedin.com/in/ashraful-alam-nayon-cscm%E2%84%A2-a16909b4/',
   },
 ]
 
