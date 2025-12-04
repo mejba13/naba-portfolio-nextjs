@@ -356,9 +356,19 @@ export function Footer() {
               <span className="hidden sm:inline">All rights reserved</span>
             </div>
 
-            {/* Made with love */}
+            {/* Developer credit & Made with love */}
             <div className="flex items-center gap-3">
               <p className="text-sm text-slate-500 flex items-center gap-1.5">
+                <span>Developed by</span>
+                <a
+                  href="https://www.ramlit.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-300 hover:text-amber-400 font-medium transition-colors duration-200"
+                >
+                  Ramlit Limited
+                </a>
+                <span className="text-slate-600 mx-1">|</span>
                 <span>Crafted with</span>
                 <motion.span
                   animate={{ scale: [1, 1.2, 1] }}
