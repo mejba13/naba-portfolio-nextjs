@@ -1,50 +1,93 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
+import { useRef } from 'react'
 import { personalInfo } from '@/data/portfolio'
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.9,
-      delay: i * 0.12,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 0.8,
+      delay: i * 0.1,
+      ease: [0.22, 1, 0.36, 1],
     },
   }),
 }
 
 const scaleIn = {
-  hidden: { opacity: 0, scale: 0.92 },
+  hidden: { opacity: 0, scale: 0.9 },
   visible: {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 1.1,
-      delay: 0.2,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 1,
+      delay: 0.15,
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 }
 
 const floatIn = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  hidden: { opacity: 0, y: 20, scale: 0.9 },
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.7,
+      duration: 0.6,
       delay,
-      ease: [0.16, 1, 0.3, 1],
+      ease: [0.22, 1, 0.36, 1],
     },
   }),
 }
 
+const socialLinks = [
+  {
+    name: 'LinkedIn',
+    href: personalInfo.social.linkedin,
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+      </svg>
+    ),
+    color: 'hover:bg-[#0A66C2] hover:border-[#0A66C2]',
+  },
+  {
+    name: 'WhatsApp',
+    href: `https://wa.me/${personalInfo.phone.replace(/[^+\d]/g, '')}`,
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg>
+    ),
+    color: 'hover:bg-[#25D366] hover:border-[#25D366]',
+  },
+  {
+    name: 'Email',
+    href: `mailto:${personalInfo.email}`,
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+    color: 'hover:bg-amber-500 hover:border-amber-500',
+  },
+]
+
 export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  })
+
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+
   const handleScroll = (href: string) => {
     const element = document.querySelector(href)
     if (element) {
@@ -54,382 +97,346 @@ export function Hero() {
 
   return (
     <section
+      ref={containerRef}
       id="home"
       aria-label="Hero section - Introduction"
       itemScope
       itemType="https://schema.org/Person"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex flex-col overflow-hidden"
     >
       {/* Premium Gradient Background */}
       <div className="absolute inset-0">
-        {/* Base gradient with warm tones */}
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 via-white to-slate-50" />
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50/90 via-white to-orange-50/50" />
 
-        {/* Aurora-like gradient mesh */}
+        {/* Geometric pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
+
+        {/* Gradient mesh */}
         <div
           className="absolute inset-0"
           style={{
             background: `
-              radial-gradient(ellipse 100% 80% at 70% 0%, rgba(251,191,36,0.12), transparent 50%),
-              radial-gradient(ellipse 80% 60% at 0% 50%, rgba(245,158,11,0.08), transparent 50%),
-              radial-gradient(ellipse 60% 80% at 100% 80%, rgba(148,163,184,0.08), transparent 50%)
+              radial-gradient(ellipse 80% 60% at 70% -10%, rgba(251,191,36,0.15), transparent 50%),
+              radial-gradient(ellipse 60% 50% at -10% 50%, rgba(251,146,60,0.1), transparent 50%),
+              radial-gradient(ellipse 50% 60% at 100% 90%, rgba(148,163,184,0.08), transparent 50%)
             `,
           }}
         />
 
         {/* Animated gradient orbs */}
         <motion.div
-          className="absolute top-0 left-1/4 w-[800px] h-[800px] rounded-full"
+          className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(251,191,36,0.1) 0%, rgba(245,158,11,0.05) 40%, transparent 70%)',
-            filter: 'blur(40px)',
+            background: 'radial-gradient(circle, rgba(251,191,36,0.12) 0%, transparent 60%)',
+            filter: 'blur(60px)',
           }}
           animate={{
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-20 right-0 w-[600px] h-[600px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(100,116,139,0.08) 0%, rgba(148,163,184,0.04) 40%, transparent 70%)',
-            filter: 'blur(30px)',
-          }}
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 40, 0],
+            x: [0, 30, 0],
+            y: [0, -20, 0],
             scale: [1, 1.05, 1],
           }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
         />
-
-        {/* Subtle noise texture */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
+        <motion.div
+          className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+            background: 'radial-gradient(circle, rgba(251,146,60,0.1) 0%, transparent 60%)',
+            filter: 'blur(50px)',
           }}
+          animate={{
+            x: [0, -20, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.08, 1],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
         />
       </div>
 
-      <div className="relative z-10 container-custom w-full pt-28 pb-20 sm:pt-32 sm:pb-24 lg:pt-36 lg:pb-28">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 xl:gap-16 items-center">
-          {/* Content Column */}
-          <motion.div
-            className="lg:col-span-6 xl:col-span-6 text-center lg:text-left order-2 lg:order-1"
-            initial="hidden"
-            animate="visible"
-          >
-            {/* Status Badge with gradient border */}
-            <motion.div custom={0} variants={fadeInUp} className="mb-8">
-              <span className="relative inline-flex items-center gap-2.5 px-4 py-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg shadow-amber-500/5">
-                {/* Gradient border */}
-                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-200 via-orange-200 to-amber-200 opacity-60" style={{ padding: '1px' }}>
-                  <span className="absolute inset-[1px] rounded-full bg-white/95" />
-                </span>
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gradient-to-br from-emerald-400 to-emerald-600" />
-                </span>
-                <span className="relative text-xs sm:text-sm font-medium text-slate-600">
-                  Available for Strategic Opportunities
-                </span>
-              </span>
-            </motion.div>
-
-            {/* Greeting */}
-            <motion.p
-              custom={1}
-              variants={fadeInUp}
-              className="text-slate-500 text-base sm:text-lg font-medium mb-4"
-            >
-              Hello, I&apos;m
-            </motion.p>
-
-            {/* Name with enhanced gradient */}
-            <motion.h1 custom={2} variants={fadeInUp} className="mb-6" itemProp="name">
-              <span className="block font-display text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight text-slate-900 leading-[1.1]">
-                Rabiul Islam
-              </span>
-              <span className="block font-display text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight leading-[1.1] mt-1 sm:mt-2 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent">
-                Naba
-              </span>
-            </motion.h1>
-
-            {/* Title with subtle gradient */}
-            <motion.p
-              custom={3}
-              variants={fadeInUp}
-              className="font-display text-xl sm:text-2xl lg:text-xl xl:text-2xl text-slate-600 mb-6 font-medium leading-relaxed"
-              itemProp="jobTitle"
-            >
-              {personalInfo.title}
-            </motion.p>
-
-            {/* Description */}
-            <motion.p
-              custom={4}
-              variants={fadeInUp}
-              className="text-slate-500 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8"
-              itemProp="description"
-            >
-              {personalInfo.shortBio}
-            </motion.p>
-
-            {/* CTAs with gradient buttons */}
+      {/* Main Content */}
+      <motion.div
+        className="relative z-10 flex-1 flex items-center"
+        style={{ y, opacity }}
+      >
+        <div className="container-custom w-full py-16 sm:py-20 lg:py-24">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 items-center">
+            {/* Content Column */}
             <motion.div
-              custom={5}
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-12"
+              className="lg:col-span-6 text-center lg:text-left order-2 lg:order-1"
+              initial="hidden"
+              animate="visible"
             >
-              {/* Primary CTA with gradient */}
-              <motion.button
-                onClick={() => handleScroll('#contact')}
-                className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-4 text-white text-[15px] font-semibold rounded-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/30"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {/* Gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600" />
-                {/* Animated shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                {/* Subtle inner glow */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/10" />
-                <span className="relative z-10">Get in Touch</span>
-                <svg
-                  className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </motion.button>
+              {/* Eyebrow + Status */}
+              <motion.div custom={0} variants={fadeInUp} className="flex flex-col sm:flex-row items-center lg:items-start gap-3 mb-6">
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-amber-200/50 shadow-lg shadow-amber-500/5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  <span className="text-xs font-semibold text-slate-600 uppercase tracking-wide">
+                    Open to Opportunities
+                  </span>
+                </span>
+              </motion.div>
 
-              {/* Secondary CTA with gradient border */}
-              <motion.button
-                onClick={() => handleScroll('#experience')}
-                className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 text-slate-700 text-[15px] font-semibold rounded-full transition-all duration-300 hover:shadow-xl"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              {/* Headline */}
+              <motion.div custom={1} variants={fadeInUp} className="mb-6">
+                <p className="text-slate-500 text-lg font-medium mb-2 tracking-wide">
+                  Strategic Supply Chain Leader
+                </p>
+                <h1 itemProp="name" className="font-display">
+                  <span className="block text-4xl sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-slate-900 leading-[1.1] tracking-tight">
+                    Rabiul Islam
+                  </span>
+                  <span className="block text-4xl sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold leading-[1.1] tracking-tight mt-1">
+                    <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent">
+                      Naba
+                    </span>
+                  </span>
+                </h1>
+              </motion.div>
+
+              {/* Value Proposition */}
+              <motion.div custom={2} variants={fadeInUp} className="mb-6">
+                <p
+                  className="text-xl sm:text-2xl text-slate-700 font-semibold leading-snug"
+                  itemProp="jobTitle"
+                >
+                  Transforming Supply Chains Into
+                  <span className="text-amber-600"> Competitive Advantages</span>
+                </p>
+              </motion.div>
+
+              {/* Description */}
+              <motion.p
+                custom={3}
+                variants={fadeInUp}
+                className="text-slate-500 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8"
+                itemProp="description"
               >
-                {/* Gradient border */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 p-[1.5px]">
-                  <div className="absolute inset-[1.5px] rounded-full bg-white group-hover:bg-slate-50 transition-colors" />
+                Driving operational excellence across manufacturing, energy, and technology sectors with proven expertise in procurement optimization, vendor management, and strategic sourcing.
+              </motion.p>
+
+              {/* CTA Buttons */}
+              <motion.div
+                custom={4}
+                variants={fadeInUp}
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
+              >
+                {/* Primary CTA */}
+                <motion.button
+                  onClick={() => handleScroll('#contact')}
+                  className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-white font-semibold rounded-full overflow-hidden shadow-xl shadow-amber-500/25 hover:shadow-2xl hover:shadow-amber-500/30 transition-shadow duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                  <span className="relative">Let&apos;s Connect</span>
+                  <svg className="relative w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </motion.button>
+
+                {/* Secondary CTA */}
+                <motion.button
+                  onClick={() => handleScroll('#experience')}
+                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-700 font-semibold rounded-full border-2 border-slate-200 hover:border-amber-300 hover:bg-amber-50 transition-all duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span>View My Journey</span>
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </motion.button>
+              </motion.div>
+
+              {/* Social Links */}
+              <motion.div
+                custom={5}
+                variants={fadeInUp}
+                className="flex items-center gap-3 justify-center lg:justify-start mb-10"
+              >
+                <span className="text-sm text-slate-400 font-medium">Connect:</span>
+                <div className="flex gap-2">
+                  {socialLinks.map((link) => (
+                    <motion.a
+                      key={link.name}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-10 h-10 rounded-full border-2 border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:text-white transition-all duration-300 ${link.color}`}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label={link.name}
+                    >
+                      {link.icon}
+                    </motion.a>
+                  ))}
                 </div>
-                <span className="relative z-10">View Experience</span>
-              </motion.button>
+              </motion.div>
+
+              {/* Stats Row */}
+              <motion.div
+                custom={6}
+                variants={fadeInUp}
+                className="grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0"
+              >
+                {[
+                  { value: '10+', label: 'Years', sublabel: 'Experience' },
+                  { value: '5', label: 'Companies', sublabel: 'Leadership' },
+                  { value: 'CIPS', label: 'Certified', sublabel: 'Professional' },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    className="group text-center lg:text-left p-4 rounded-2xl bg-white/60 backdrop-blur-sm border border-slate-100 hover:border-amber-200 hover:bg-white transition-all duration-300"
+                    whileHover={{ y: -4 }}
+                  >
+                    <p className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
+                      {stat.value}
+                    </p>
+                    <p className="text-sm font-semibold text-slate-700">{stat.label}</p>
+                    <p className="text-xs text-slate-400">{stat.sublabel}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
 
-            {/* Stats Cards */}
+            {/* Image Column */}
             <motion.div
-              custom={6}
-              variants={fadeInUp}
-              className="flex flex-wrap items-stretch justify-center lg:justify-start gap-3 sm:gap-4"
+              className="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end"
+              variants={scaleIn}
+              initial="hidden"
+              animate="visible"
             >
-              {[
-                { value: '10+', label: 'Years', sublabel: 'Experience', gradient: 'from-amber-500 to-orange-500', bg: 'from-amber-50 to-orange-50', border: 'border-amber-200/50', shadow: 'shadow-amber-500/10', icon: (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                )},
-                { value: '5', label: 'Companies', sublabel: 'Worked With', gradient: 'from-slate-600 to-slate-800', bg: 'from-slate-50 to-slate-100', border: 'border-slate-200/50', shadow: 'shadow-slate-500/10', icon: (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                  </svg>
-                )},
-                { value: 'CIPS', label: 'Certified', sublabel: 'Professional', gradient: 'from-emerald-500 to-teal-600', bg: 'from-emerald-50 to-teal-50', border: 'border-emerald-200/50', shadow: 'shadow-emerald-500/10', icon: (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                  </svg>
-                )},
-              ].map((stat, index) => (
+              <div className="relative">
+                {/* Main Image Container */}
+                <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[400px] lg:h-[400px] xl:w-[460px] xl:h-[460px]">
+                  {/* Decorative ring */}
+                  <motion.div
+                    className="absolute -inset-4 rounded-full border-2 border-dashed border-amber-200/50"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+                  />
+
+                  {/* Gradient background shape */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-200 via-amber-100 to-orange-100 rounded-[2.5rem] transform rotate-3" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-orange-100 via-amber-50 to-white rounded-[2.5rem]" />
+
+                  {/* Image frame */}
+                  <div className="absolute inset-3 rounded-[2rem] overflow-hidden shadow-2xl shadow-amber-200/40 border-4 border-white">
+                    <Image
+                      src={personalInfo.profileImage}
+                      alt={`${personalInfo.name} - ${personalInfo.title}`}
+                      fill
+                      className="object-cover object-center"
+                      priority
+                      sizes="(max-width: 640px) 288px, (max-width: 768px) 320px, (max-width: 1024px) 384px, (max-width: 1280px) 400px, 460px"
+                      itemProp="image"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/10" />
+                  </div>
+                </div>
+
+                {/* Floating Badge - BUET */}
                 <motion.div
-                  key={stat.label}
-                  className="group relative"
-                  whileHover={{ y: -2, scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
+                  className="hidden sm:flex absolute -top-2 -right-2 lg:-right-6 items-center gap-3 px-4 py-3 bg-white rounded-2xl shadow-xl border border-amber-100"
+                  custom={0.8}
+                  variants={floatIn}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover={{ scale: 1.05, y: -4 }}
                 >
-                  {/* Gradient glow on hover */}
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${stat.gradient} rounded-2xl opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-500`} />
-
-                  {/* Card */}
-                  <div className={`relative px-5 py-4 sm:px-6 sm:py-5 bg-gradient-to-br ${stat.bg} rounded-xl border ${stat.border} backdrop-blur-sm shadow-lg ${stat.shadow} group-hover:shadow-xl transition-all duration-300`}>
-                    <div className="flex items-center gap-3 sm:gap-4">
-                      {/* Icon */}
-                      <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center text-white shadow-lg ${stat.shadow} group-hover:scale-110 transition-transform duration-300`}>
-                        {stat.icon}
-                      </div>
-
-                      {/* Content */}
-                      <div>
-                        <p className={`font-display text-2xl sm:text-3xl font-bold tracking-tight bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent leading-none`}>
-                          {stat.value}
-                        </p>
-                        <p className="text-xs sm:text-sm text-slate-600 font-medium mt-0.5">{stat.label}</p>
-                      </div>
-                    </div>
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center overflow-hidden">
+                    <Image src="/images/buet-logo.jpeg" alt="BUET" width={28} height={28} className="rounded-lg" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-900">BUET Graduate</p>
+                    <p className="text-xs text-slate-500">Industrial Engineering</p>
                   </div>
                 </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
 
-          {/* Image Column */}
-          <motion.div
-            className="lg:col-span-6 xl:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end"
-            variants={scaleIn}
-            initial="hidden"
-            animate="visible"
-          >
-            <div className="relative">
-              {/* Main Image Container */}
-              <div className="relative w-72 h-72 xs:w-80 xs:h-80 sm:w-96 sm:h-96 lg:w-[380px] lg:h-[380px] xl:w-[440px] xl:h-[440px]">
-                {/* Gradient decorative ring */}
-                <div className="absolute -inset-4 sm:-inset-5 rounded-[2.5rem] bg-gradient-to-br from-amber-300/30 via-orange-200/20 to-transparent blur-sm" />
-                <div className="absolute -inset-3 sm:-inset-4 rounded-[2.5rem] bg-gradient-to-br from-amber-200/50 via-amber-100/30 to-transparent" />
-
-                {/* Animated background shape */}
+                {/* Floating Badge - Current Role */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-amber-200 via-amber-100 to-orange-100/50 rounded-[2rem]"
-                  animate={{ rotate: [3, 5, 3] }}
-                  transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-                />
-
-                {/* Image frame with gradient border */}
-                <div className="absolute inset-2 sm:inset-3 rounded-[1.5rem] overflow-hidden bg-white shadow-2xl shadow-amber-200/30">
-                  {/* Gradient border effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-100 via-white to-orange-50 p-[2px] rounded-[1.5rem]">
-                    <div className="absolute inset-[2px] rounded-[calc(1.5rem-2px)] overflow-hidden bg-white">
-                      <Image
-                        src={personalInfo.profileImage}
-                        alt={`${personalInfo.name} - ${personalInfo.title}`}
-                        fill
-                        className="object-cover object-center"
-                        priority
-                        sizes="(max-width: 475px) 288px, (max-width: 640px) 320px, (max-width: 768px) 384px, (max-width: 1024px) 380px, 440px"
-                        itemProp="image"
-                      />
-                      {/* Premium gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-amber-100/10" />
-                    </div>
+                  className="hidden sm:flex absolute -bottom-2 -left-2 lg:-left-6 items-center gap-3 px-4 py-3 bg-white rounded-2xl shadow-xl border border-slate-100"
+                  custom={1}
+                  variants={floatIn}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover={{ scale: 1.05, y: -4 }}
+                >
+                  <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center overflow-hidden">
+                    <Image src="/images/fervent-main-logo.jpg" alt="Fervent" width={32} height={32} className="object-contain" />
                   </div>
-                </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-900">Head of Supply Chain</p>
+                    <p className="text-xs text-slate-500">Fervent Multiboard</p>
+                  </div>
+                </motion.div>
+
+                {/* Floating Badge - CIPS */}
+                <motion.div
+                  className="hidden md:flex absolute top-1/2 -right-4 lg:-right-12 -translate-y-1/2 items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl shadow-lg shadow-emerald-500/30"
+                  custom={1.2}
+                  variants={floatIn}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover={{ scale: 1.08 }}
+                >
+                  <Image src="/images/cips-logo.jpeg" alt="CIPS" width={22} height={22} className="rounded" />
+                  <span className="text-xs font-bold text-white">CIPS Certified</span>
+                </motion.div>
+
+                {/* Experience counter badge */}
+                <motion.div
+                  className="hidden lg:flex absolute bottom-1/4 -left-8 xl:-left-14 flex-col items-center justify-center w-20 h-20 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-xl"
+                  custom={1.4}
+                  variants={floatIn}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                >
+                  <span className="text-2xl font-bold text-amber-400">10+</span>
+                  <span className="text-[10px] text-slate-400 uppercase tracking-wider">Years</span>
+                </motion.div>
               </div>
-
-              {/* Floating Badge - BUET with gradient shadow */}
-              <motion.div
-                className="hidden sm:flex absolute -top-3 -right-3 sm:-top-4 sm:-right-4 lg:-right-6 items-center gap-3 px-4 py-3 bg-white rounded-2xl shadow-xl shadow-amber-200/40 border border-amber-100/50"
-                custom={0.9}
-                variants={floatIn}
-                initial="hidden"
-                animate="visible"
-                whileHover={{ scale: 1.03, y: -3, boxShadow: '0 25px 50px -12px rgba(251, 191, 36, 0.25)' }}
-              >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center shadow-inner">
-                  <Image
-                    src="/images/buet-logo.jpeg"
-                    alt="BUET"
-                    width={28}
-                    height={28}
-                    className="rounded-lg"
-                  />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-slate-900">BUET Graduate</p>
-                  <p className="text-xs text-slate-500">Industrial Engineering</p>
-                </div>
-              </motion.div>
-
-              {/* Floating Badge - Current Role with gradient accent */}
-              <motion.div
-                className="hidden sm:flex absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-4 lg:-left-6 items-center gap-3 px-4 py-3 bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100"
-                custom={1.1}
-                variants={floatIn}
-                initial="hidden"
-                animate="visible"
-                whileHover={{ scale: 1.03, y: -3, boxShadow: '0 25px 50px -12px rgba(100, 116, 139, 0.2)' }}
-              >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/50 flex items-center justify-center overflow-hidden">
-                  <Image
-                    src="/images/fervent-main-logo.jpg"
-                    alt="Fervent"
-                    width={32}
-                    height={32}
-                    className="object-contain"
-                  />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-slate-900">Head of Supply Chain</p>
-                  <p className="text-xs text-slate-500">Fervent Multiboard</p>
-                </div>
-              </motion.div>
-
-              {/* Floating Badge - CIPS with enhanced gradient */}
-              <motion.div
-                className="hidden md:flex absolute top-1/2 -right-2 lg:-right-10 -translate-y-1/2 items-center gap-2 px-4 py-2.5 rounded-xl shadow-lg shadow-emerald-500/30"
-                style={{
-                  background: 'linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%)',
-                }}
-                custom={1.3}
-                variants={floatIn}
-                initial="hidden"
-                animate="visible"
-                whileHover={{ scale: 1.05, boxShadow: '0 20px 40px -12px rgba(16, 185, 129, 0.4)' }}
-              >
-                {/* Shine effect */}
-                <div className="absolute inset-0 rounded-xl overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/10 to-white/20" />
-                </div>
-                <Image
-                  src="/images/cips-logo.jpeg"
-                  alt="CIPS"
-                  width={22}
-                  height={22}
-                  className="rounded relative z-10"
-                />
-                <span className="text-xs font-semibold text-white relative z-10">CIPS Certified</span>
-              </motion.div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Scroll Indicator with gradient */}
+      {/* Scroll Indicator */}
       <motion.div
-        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.8, duration: 0.6 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
       >
         <motion.button
           onClick={() => handleScroll('#about')}
           className="flex flex-col items-center gap-2 group"
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <span className="text-[11px] font-medium uppercase tracking-[0.2em] bg-gradient-to-r from-slate-400 to-slate-500 bg-clip-text text-transparent group-hover:from-amber-500 group-hover:to-orange-500 transition-all duration-300">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 group-hover:text-amber-500 transition-colors">
             Scroll
           </span>
-          <div className="w-5 h-8 rounded-full border-2 border-slate-300 group-hover:border-amber-400 flex justify-center pt-1.5 transition-colors duration-300">
+          <div className="w-6 h-10 rounded-full border-2 border-slate-300 group-hover:border-amber-400 flex justify-center pt-2 transition-colors">
             <motion.div
-              className="w-1 h-1.5 bg-gradient-to-b from-slate-400 to-slate-500 group-hover:from-amber-400 group-hover:to-orange-500 rounded-full transition-colors duration-300"
-              animate={{ y: [0, 6, 0], opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-1.5 h-2 bg-slate-400 group-hover:bg-amber-500 rounded-full transition-colors"
+              animate={{ y: [0, 8, 0], opacity: [1, 0.2, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
             />
           </div>
         </motion.button>
       </motion.div>
+
     </section>
   )
 }
