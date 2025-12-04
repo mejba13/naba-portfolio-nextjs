@@ -198,17 +198,17 @@ export function Footer() {
       <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Main Footer */}
         <motion.div
-          className="py-16 sm:py-20"
+          className="py-10 sm:py-16 lg:py-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8">
             {/* Brand Column */}
-            <motion.div variants={itemVariants} className="lg:col-span-5">
+            <motion.div variants={itemVariants} className="lg:col-span-5 text-center md:text-left">
               {/* Logo and Name */}
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-6 justify-center md:justify-start">
                 {/* Logo with gradient border */}
                 <div className="relative group">
                   <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 rounded-xl opacity-70 blur-sm group-hover:opacity-100 transition-opacity duration-300" />
@@ -233,12 +233,12 @@ export function Footer() {
               </div>
 
               {/* Bio */}
-              <p className="text-slate-400 leading-relaxed mb-8 max-w-md">
+              <p className="text-slate-400 leading-relaxed mb-8 max-w-md mx-auto md:mx-0">
                 {personalInfo.shortBio}
               </p>
 
               {/* Social Links */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 justify-center md:justify-start">
                 {socialLinks.map((link) => (
                   <motion.a
                     key={link.name}
@@ -264,11 +264,32 @@ export function Footer() {
             </motion.div>
 
             {/* Quick Links */}
-            <motion.div variants={itemVariants} className="lg:col-span-3">
-              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-6">
+            <motion.div variants={itemVariants} className="lg:col-span-3 text-center md:text-left">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 sm:mb-6">
                 Quick Links
               </h4>
-              <ul className="space-y-3">
+              {/* Mobile: Modern pill/chip grid */}
+              <div className="flex flex-wrap justify-center gap-2 md:hidden">
+                {navLinks.map((link) => (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleNavClick(link.href)
+                    }}
+                    className="group relative px-4 py-2 rounded-full bg-slate-800/80 border border-slate-700/50 text-slate-400 text-sm font-medium overflow-hidden"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {/* Gradient hover effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span className="relative group-hover:text-white transition-colors duration-200">{link.label}</span>
+                  </motion.a>
+                ))}
+              </div>
+              {/* Desktop: Traditional list */}
+              <ul className="hidden md:block space-y-3">
                 {navLinks.map((link) => (
                   <li key={link.href}>
                     <a
@@ -288,11 +309,43 @@ export function Footer() {
             </motion.div>
 
             {/* Contact Info */}
-            <motion.div variants={itemVariants} className="lg:col-span-4">
-              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-6">
+            <motion.div variants={itemVariants} className="lg:col-span-4 text-center md:text-left">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-4 sm:mb-6">
                 Get in Touch
               </h4>
-              <ul className="space-y-4">
+
+              {/* Mobile: Modern 2-column card grid */}
+              <div className="grid grid-cols-2 gap-3 md:hidden">
+                {contactItems.map((item, index) => (
+                  <motion.a
+                    key={index}
+                    href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="group relative flex flex-col items-center gap-2 p-4 rounded-2xl bg-slate-800/60 border border-slate-700/50 overflow-hidden"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {/* Gradient hover background */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+
+                    {/* Icon with gradient */}
+                    <div className={`relative w-10 h-10 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-lg`}>
+                      <span className="text-white">
+                        {item.icon}
+                      </span>
+                    </div>
+
+                    {/* Text */}
+                    <span className="relative text-xs text-slate-400 group-hover:text-white transition-colors duration-200 text-center line-clamp-1">
+                      {item.value}
+                    </span>
+                  </motion.a>
+                ))}
+              </div>
+
+              {/* Desktop: Traditional list */}
+              <ul className="hidden md:block space-y-4">
                 {contactItems.map((item, index) => (
                   <li key={index}>
                     <a
@@ -320,7 +373,7 @@ export function Footer() {
                   e.preventDefault()
                   handleNavClick('#contact')
                 }}
-                className="group relative inline-flex items-center gap-2 mt-8 px-6 py-3 overflow-hidden rounded-xl font-medium text-white"
+                className="group relative inline-flex items-center gap-2 mt-5 sm:mt-8 px-6 py-3 overflow-hidden rounded-xl font-medium text-white"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -340,24 +393,16 @@ export function Footer() {
         </motion.div>
 
         {/* Bottom Bar */}
-        <div className="relative py-6">
+        <div className="relative py-5 sm:py-6">
           {/* Gradient separator */}
           <div className="absolute top-0 left-0 right-0 h-px">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
             <div className="absolute left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-amber-500/50 via-orange-500/50 to-amber-500/50" />
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            {/* Copyright */}
-            <div className="flex items-center gap-2 text-sm text-slate-500">
-              <span>&copy; {currentYear}</span>
-              <span className="text-slate-400 font-medium">{personalInfo.name}</span>
-              <span className="hidden sm:inline">•</span>
-              <span className="hidden sm:inline">All rights reserved</span>
-            </div>
-
-            {/* Developer credit & Made with love */}
-            <div className="flex items-center gap-3">
+          <div className="flex flex-col items-center gap-4 sm:gap-3">
+            {/* Developer credit & Made with love - Mobile friendly */}
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
               <p className="text-sm text-slate-500 flex items-center gap-1.5">
                 <span>Developed by</span>
                 <a
@@ -368,7 +413,9 @@ export function Footer() {
                 >
                   Ramlit Limited
                 </a>
-                <span className="text-slate-600 mx-1">|</span>
+              </p>
+              <span className="hidden sm:inline text-slate-600">|</span>
+              <p className="text-sm text-slate-500 flex items-center gap-1.5">
                 <span>Crafted with</span>
                 <motion.span
                   animate={{ scale: [1, 1.2, 1] }}
@@ -381,11 +428,21 @@ export function Footer() {
                 <span>in</span>
                 <span className="text-slate-400 font-medium">Bangladesh</span>
               </p>
+            </div>
+
+            {/* Copyright & Back to Top */}
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500">
+                <span>&copy; {currentYear}</span>
+                <span className="text-slate-400 font-medium">{personalInfo.name}</span>
+                <span className="hidden sm:inline">•</span>
+                <span className="hidden sm:inline">All rights reserved</span>
+              </div>
 
               {/* Back to Top Button */}
               <motion.button
                 onClick={scrollToTop}
-                className="group relative w-10 h-10 rounded-xl overflow-hidden"
+                className="group relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 aria-label="Back to top"
@@ -397,7 +454,7 @@ export function Footer() {
                 {/* Icon */}
                 <span className="relative z-10 flex items-center justify-center w-full h-full">
                   <motion.svg
-                    className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors duration-300"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-white transition-colors duration-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

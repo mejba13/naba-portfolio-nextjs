@@ -163,8 +163,8 @@ export function Hero() {
         className="relative z-10 flex-1 flex items-center"
         style={{ y, opacity }}
       >
-        <div className="container-custom w-full py-16 sm:py-20 lg:py-24">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 items-center">
+        <div className="container-custom w-full py-8 sm:py-16 lg:py-24">
+          <div className="grid lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-8 xl:gap-12 items-center">
             {/* Content Column */}
             <motion.div
               className="lg:col-span-6 text-center lg:text-left order-2 lg:order-1"
@@ -172,7 +172,7 @@ export function Hero() {
               animate="visible"
             >
               {/* Eyebrow + Status */}
-              <motion.div custom={0} variants={fadeInUp} className="flex flex-col sm:flex-row items-center lg:items-start gap-3 mb-6">
+              <motion.div custom={0} variants={fadeInUp} className="flex flex-col sm:flex-row items-center lg:items-start gap-3 mb-4 sm:mb-6">
                 <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-amber-200/50 shadow-lg shadow-amber-500/5">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -185,15 +185,15 @@ export function Hero() {
               </motion.div>
 
               {/* Headline */}
-              <motion.div custom={1} variants={fadeInUp} className="mb-6">
-                <p className="text-slate-500 text-lg font-medium mb-2 tracking-wide">
+              <motion.div custom={1} variants={fadeInUp} className="mb-4 sm:mb-6">
+                <p className="text-slate-500 text-base sm:text-lg font-medium mb-1 sm:mb-2 tracking-wide">
                   Strategic Supply Chain Leader
                 </p>
                 <h1 itemProp="name" className="font-display">
-                  <span className="block text-4xl sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-slate-900 leading-[1.1] tracking-tight">
+                  <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-slate-900 leading-[1.1] tracking-tight">
                     Rabiul Islam
                   </span>
-                  <span className="block text-4xl sm:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold leading-[1.1] tracking-tight mt-1">
+                  <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold leading-[1.1] tracking-tight mt-1">
                     <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent">
                       Naba
                     </span>
@@ -202,9 +202,9 @@ export function Hero() {
               </motion.div>
 
               {/* Value Proposition */}
-              <motion.div custom={2} variants={fadeInUp} className="mb-6">
+              <motion.div custom={2} variants={fadeInUp} className="mb-4 sm:mb-6">
                 <p
-                  className="text-xl sm:text-2xl text-slate-700 font-semibold leading-snug"
+                  className="text-lg sm:text-xl md:text-2xl text-slate-700 font-semibold leading-snug"
                   itemProp="jobTitle"
                 >
                   Transforming Supply Chains Into
@@ -216,7 +216,7 @@ export function Hero() {
               <motion.p
                 custom={3}
                 variants={fadeInUp}
-                className="text-slate-500 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8"
+                className="text-slate-500 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8"
                 itemProp="description"
               >
                 Driving operational excellence across manufacturing, energy, and technology sectors with proven expertise in procurement optimization, vendor management, and strategic sourcing.
@@ -226,12 +226,12 @@ export function Hero() {
               <motion.div
                 custom={4}
                 variants={fadeInUp}
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-6 sm:mb-8"
               >
                 {/* Primary CTA */}
                 <motion.button
                   onClick={() => handleScroll('#contact')}
-                  className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-white font-semibold rounded-full overflow-hidden shadow-xl shadow-amber-500/25 hover:shadow-2xl hover:shadow-amber-500/30 transition-shadow duration-300"
+                  className="group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 text-white font-semibold rounded-full overflow-hidden shadow-xl shadow-amber-500/25 hover:shadow-2xl hover:shadow-amber-500/30 transition-shadow duration-300"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -246,7 +246,7 @@ export function Hero() {
                 {/* Secondary CTA */}
                 <motion.button
                   onClick={() => handleScroll('#experience')}
-                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-700 font-semibold rounded-full border-2 border-slate-200 hover:border-amber-300 hover:bg-amber-50 transition-all duration-300"
+                  className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white text-slate-700 font-semibold rounded-full border-2 border-slate-200 hover:border-amber-300 hover:bg-amber-50 transition-all duration-300"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -261,7 +261,7 @@ export function Hero() {
               <motion.div
                 custom={5}
                 variants={fadeInUp}
-                className="flex items-center gap-3 justify-center lg:justify-start mb-10"
+                className="flex items-center gap-3 justify-center lg:justify-start mb-6 sm:mb-10"
               >
                 <span className="text-sm text-slate-400 font-medium">Connect:</span>
                 <div className="flex gap-2">
@@ -286,7 +286,7 @@ export function Hero() {
               <motion.div
                 custom={6}
                 variants={fadeInUp}
-                className="grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0"
+                className="grid grid-cols-3 gap-2 sm:gap-4 max-w-lg mx-auto lg:mx-0"
               >
                 {[
                   { value: '10+', label: 'Years', sublabel: 'Experience' },
@@ -295,14 +295,14 @@ export function Hero() {
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
-                    className="group text-center lg:text-left p-4 rounded-2xl bg-white/60 backdrop-blur-sm border border-slate-100 hover:border-amber-200 hover:bg-white transition-all duration-300"
+                    className="group text-center lg:text-left p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white/60 backdrop-blur-sm border border-slate-100 hover:border-amber-200 hover:bg-white transition-all duration-300"
                     whileHover={{ y: -4 }}
                   >
-                    <p className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
                       {stat.value}
                     </p>
-                    <p className="text-sm font-semibold text-slate-700">{stat.label}</p>
-                    <p className="text-xs text-slate-400">{stat.sublabel}</p>
+                    <p className="text-xs sm:text-sm font-semibold text-slate-700">{stat.label}</p>
+                    <p className="text-[10px] sm:text-xs text-slate-400">{stat.sublabel}</p>
                   </motion.div>
                 ))}
               </motion.div>
@@ -317,7 +317,7 @@ export function Hero() {
             >
               <div className="relative">
                 {/* Main Image Container */}
-                <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[400px] lg:h-[400px] xl:w-[460px] xl:h-[460px]">
+                <div className="relative w-52 h-52 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] xl:w-[460px] xl:h-[460px]">
                   {/* Decorative ring */}
                   <motion.div
                     className="absolute -inset-4 rounded-full border-2 border-dashed border-amber-200/50"
@@ -337,7 +337,7 @@ export function Hero() {
                       fill
                       className="object-cover object-center"
                       priority
-                      sizes="(max-width: 640px) 288px, (max-width: 768px) 320px, (max-width: 1024px) 384px, (max-width: 1280px) 400px, 460px"
+                      sizes="(max-width: 640px) 208px, (max-width: 768px) 288px, (max-width: 1024px) 320px, (max-width: 1280px) 400px, 460px"
                       itemProp="image"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/10" />
