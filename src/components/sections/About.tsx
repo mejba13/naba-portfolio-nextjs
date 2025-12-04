@@ -63,6 +63,62 @@ const achievementGradients = [
   { bg: 'from-slate-600 to-slate-800', light: 'from-slate-50 to-slate-100', border: 'border-slate-200', text: 'text-slate-600', shadow: 'shadow-slate-500/20' },
 ]
 
+// Keywords to highlight in the bio
+const highlightKeywords = [
+  'Rabiul Islam Naba',
+  'Head of Supply Chain',
+  'Fervent Multiboard Industries Limited',
+  'Bangladesh University of Engineering and Technology (BUET)',
+  'BUET',
+  'Bachelor of Engineering',
+  'Industrial Engineering',
+  'Diploma in Procurement and Supply',
+  'CIPS (The Chartered Institute of Procurement & Supply)',
+  'CIPS',
+  'Rahimafrooz Storage Power Business',
+  'Walton Micro-Tech Corporation Ltd.',
+  'Square Pharmaceuticals Limited',
+  'supply chain and procurement leader',
+  '10 years of experience',
+  'over 10 years',
+  'strategic sourcing',
+  'vendor management',
+  'operational optimization',
+  'strategic mindset',
+  'operational excellence',
+]
+
+// Function to highlight keywords in text
+function highlightText(text: string): JSX.Element[] {
+  // Sort keywords by length (longest first) to avoid partial matches
+  const sortedKeywords = [...highlightKeywords].sort((a, b) => b.length - a.length)
+
+  // Create a regex pattern that matches any of the keywords (case insensitive)
+  const pattern = new RegExp(
+    `(${sortedKeywords.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`,
+    'gi'
+  )
+
+  // Split text by the pattern while keeping the matches
+  const parts = text.split(pattern)
+
+  return parts.map((part, index) => {
+    // Check if this part matches any keyword (case insensitive)
+    const isKeyword = sortedKeywords.some(
+      keyword => keyword.toLowerCase() === part.toLowerCase()
+    )
+
+    if (isKeyword) {
+      return (
+        <span key={index} className="font-semibold text-slate-800">
+          {part}
+        </span>
+      )
+    }
+    return <span key={index}>{part}</span>
+  })
+}
+
 export function About() {
   return (
     <section id="about" aria-labelledby="about-heading" className="relative py-24 sm:py-32 overflow-hidden">
@@ -160,7 +216,7 @@ export function About() {
               <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 sm:p-8">
                 {personalInfo.fullBio.split('\n\n').map((paragraph, index) => (
                   <p key={index} className="text-slate-600 leading-relaxed mb-4 last:mb-0 text-[15px]">
-                    {paragraph}
+                    {highlightText(paragraph)}
                   </p>
                 ))}
               </div>
