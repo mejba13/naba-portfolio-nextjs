@@ -17,8 +17,15 @@ const spaceGrotesk = Space_Grotesk({
   weight: ['400', '500', '600', '700'],
 })
 
+// Dynamic base URL for metadata
+const getBaseUrl = () => {
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL
+  return 'https://naba-portfolio-nextjs.vercel.app'
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://rabiulnaba.com'),
+  metadataBase: new URL(getBaseUrl()),
 
   // Favicon and Icons
   icons: {
@@ -82,40 +89,27 @@ export const metadata: Metadata = {
     },
   },
 
-  // Open Graph
+  // Open Graph - Images auto-detected from opengraph-image.png in app directory
   openGraph: {
     type: 'profile',
     locale: 'en_US',
     siteName: 'Rabiul Islam Naba - Professional Portfolio',
     title: 'Rabiul Islam Naba | Head of Supply Chain & Procurement Specialist',
     description: 'Strategic supply chain leader with 10+ years experience driving operational excellence across manufacturing, energy, and technology sectors in Bangladesh. BUET graduate & CIPS certified.',
-    url: 'https://rabiulnaba.com',
-    images: [
-      {
-        url: '/images/open-graph-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Rabiul Islam Naba - Head of Supply Chain & Procurement Specialist',
-        type: 'image/png',
-      },
-    ],
+    url: 'https://naba-portfolio-nextjs.vercel.app',
     firstName: 'Rabiul Islam',
     lastName: 'Naba',
     username: 'rabiulnaba',
     gender: 'male',
   },
 
-  // Twitter Card
+  // Twitter Card - Images auto-detected from twitter-image.png in app directory
   twitter: {
     card: 'summary_large_image',
     site: '@rabiulnaba',
     creator: '@rabiulnaba',
     title: 'Rabiul Islam Naba | Head of Supply Chain & Procurement Specialist',
     description: 'Strategic supply chain leader with 10+ years experience. Head of Supply Chain at Fervent Multiboard Industries Ltd. BUET graduate & CIPS certified professional based in Dhaka, Bangladesh.',
-    images: {
-      url: '/images/open-graph-image.png',
-      alt: 'Rabiul Islam Naba - Supply Chain Expert',
-    },
   },
 
   // Robots
