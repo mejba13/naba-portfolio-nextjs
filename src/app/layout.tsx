@@ -92,18 +92,11 @@ export const metadata: Metadata = {
     url: 'https://rabiulnaba.com',
     images: [
       {
-        url: '/images/naba-profile-image.jpeg',
+        url: '/images/open-graph-image.png',
         width: 1200,
         height: 630,
         alt: 'Rabiul Islam Naba - Head of Supply Chain & Procurement Specialist',
-        type: 'image/jpeg',
-      },
-      {
-        url: '/images/naba-me-second-image.jpg',
-        width: 800,
-        height: 600,
-        alt: 'Rabiul Islam Naba Professional Photo',
-        type: 'image/jpeg',
+        type: 'image/png',
       },
     ],
     firstName: 'Rabiul Islam',
@@ -120,7 +113,7 @@ export const metadata: Metadata = {
     title: 'Rabiul Islam Naba | Head of Supply Chain & Procurement Specialist',
     description: 'Strategic supply chain leader with 10+ years experience. Head of Supply Chain at Fervent Multiboard Industries Ltd. BUET graduate & CIPS certified professional based in Dhaka, Bangladesh.',
     images: {
-      url: '/images/naba-profile-image.jpeg',
+      url: '/images/open-graph-image.png',
       alt: 'Rabiul Islam Naba - Supply Chain Expert',
     },
   },
