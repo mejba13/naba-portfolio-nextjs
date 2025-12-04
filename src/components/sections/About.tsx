@@ -185,12 +185,12 @@ export function About() {
               variants={itemVariants}
               className="sm:col-span-2 card-premium overflow-hidden group"
             >
-              <div className="relative h-56 xs:h-64 sm:h-72 md:h-80">
+              <div className="relative h-64 xs:h-72 sm:h-80 md:h-96">
                 <Image
                   src={personalInfo.secondaryImage}
                   alt={`${personalInfo.name} - Professional portrait`}
                   fill
-                  className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />

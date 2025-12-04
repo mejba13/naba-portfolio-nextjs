@@ -87,14 +87,22 @@ export function Experience() {
                     {/* Company Header */}
                     <div className="flex flex-wrap items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
                       {/* Logo */}
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl bg-white border border-slate-100 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-sm">
+                      <div className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0 shadow-sm ${
+                        roles[0].logo?.includes('squarelogo')
+                          ? 'bg-[#0a4d8c]'
+                          : 'bg-white border border-slate-100'
+                      }`}>
                         {roles[0].logo ? (
                           <Image
                             src={roles[0].logo}
                             alt={company}
                             width={56}
                             height={56}
-                            className="object-contain w-9 h-9 sm:w-11 sm:h-11 lg:w-13 lg:h-13"
+                            className={`object-contain ${
+                              roles[0].logo?.includes('squarelogo')
+                                ? 'w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14'
+                                : 'w-9 h-9 sm:w-11 sm:h-11 lg:w-13 lg:h-13'
+                            }`}
                           />
                         ) : (
                           <span className="text-base sm:text-lg font-bold text-slate-400">

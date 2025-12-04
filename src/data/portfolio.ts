@@ -167,6 +167,26 @@ export const experiences = [
     ],
     current: false,
   },
+  {
+    id: 8,
+    role: 'Former Joint Secretary',
+    company: 'Global Community Organization',
+    companyUrl: 'https://www.globalcommunityorganization.org/',
+    logo: '/images/gobal-comunity-logo.jpg',
+    location: 'Bangladesh',
+    period: '2008 - Present',
+    duration: 'Community Service',
+    type: 'Volunteer',
+    workType: 'Hybrid',
+    description: 'Since 2008, GCO has tackled climate change through environmental protection, sustainable living & community empowerment, while fostering inclusive social culture and humanitarian collaboration.',
+    highlights: [
+      'Environmental Protection',
+      'Community Empowerment',
+      'Climate Action',
+      'Humanitarian Collaboration',
+    ],
+    current: false,
+  },
 ]
 
 export const education = [
