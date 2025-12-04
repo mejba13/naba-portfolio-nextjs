@@ -68,31 +68,31 @@ export function Education() {
             >
               <div className="group card-premium h-full p-6 lg:p-8 hover:shadow-xl transition-all duration-500">
                 {/* Header */}
-                <div className="flex items-start gap-4 mb-6">
+                <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
                   {/* Logo */}
-                  <div className="w-16 h-16 rounded-xl bg-slate-100 flex items-center justify-center overflow-hidden flex-shrink-0 group-hover:scale-105 transition-transform duration-500">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl bg-slate-50 flex items-center justify-center overflow-hidden flex-shrink-0 group-hover:scale-105 transition-transform duration-500">
                     {edu.logo ? (
                       <Image
                         src={edu.logo}
                         alt={edu.institution}
                         width={48}
                         height={48}
-                        className="object-contain"
+                        className="object-contain w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12"
                       />
                     ) : (
-                      <span className="text-xl font-bold text-slate-400">
+                      <span className="text-lg sm:text-xl font-bold text-slate-400">
                         {edu.institution.split(' ').map(w => w[0]).join('').slice(0, 2)}
                       </span>
                     )}
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <span className="badge-gold text-xs mb-2 inline-block">{edu.period}</span>
-                    <h3 className="font-display text-xl lg:text-2xl font-semibold text-slate-900 leading-tight">
+                    <span className="badge-gold text-[10px] sm:text-xs mb-1.5 sm:mb-2 inline-block">{edu.period}</span>
+                    <h3 className="font-display text-lg sm:text-xl lg:text-2xl text-slate-900 leading-tight font-bold tracking-tight">
                       {edu.degree}
                     </h3>
                     {edu.field && (
-                      <p className="text-amber-600 font-medium mt-1">{edu.field}</p>
+                      <p className="text-amber-600 font-medium text-sm sm:text-base mt-1">{edu.field}</p>
                     )}
                   </div>
                 </div>

@@ -29,7 +29,7 @@ export const experiences = [
     role: 'Head of Supply Chain',
     company: 'Fervent Multiboard Industries Ltd.',
     companyUrl: 'https://ferventbd.com/',
-    logo: '/images/fervent-logo.svg',
+    logo: '/images/fervent-main-logo.jpg',
     location: 'Dhaka, Bangladesh',
     period: 'Jun 2023 - Present',
     duration: '2 yrs 7 mos',
@@ -49,7 +49,7 @@ export const experiences = [
     role: 'Supply Chain Manager',
     company: 'Fervent Multiboard Industries Ltd.',
     companyUrl: 'https://ferventbd.com/',
-    logo: '/images/fervent-logo.svg',
+    logo: '/images/fervent-main-logo.jpg',
     location: 'Dhaka, Bangladesh',
     period: 'Aug 2021 - Jun 2023',
     duration: '1 yr 11 mos',
@@ -68,8 +68,8 @@ export const experiences = [
     id: 3,
     role: 'Sr. Executive, Procurement',
     company: 'Rahimafrooz Storage Power Business',
-    companyUrl: 'https://rahimafrooz.com/',
-    logo: null,
+    companyUrl: 'https://www.rahimafrooz.com/',
+    logo: '/images/rahimafrooz-logo.png',
     location: 'Dhaka, Bangladesh',
     period: 'Mar 2019 - Jul 2021',
     duration: '2 yrs 5 mos',
@@ -151,8 +151,8 @@ export const experiences = [
     id: 7,
     role: 'Industrial Internship',
     company: 'Square Pharmaceuticals Limited',
-    companyUrl: 'https://squarepharma.com.bd/',
-    logo: null,
+    companyUrl: 'https://www.squarepharma.com.bd/',
+    logo: '/images/squarelogo.png',
     location: 'Kaliakoir, Gazipur, Bangladesh',
     period: 'Feb 2013 - Mar 2013',
     duration: '2 mos',
@@ -311,10 +311,12 @@ export const navLinks = [
 ]
 
 export const companyLogos = {
-  fervent: '/images/fervent-logo.svg',
+  fervent: '/images/fervent-main-logo.jpg',
   buet: '/images/buet-logo.jpeg',
   cips: '/images/cips-logo.jpeg',
   walton: '/images/Walton_Group_Logo.png',
+  square: '/images/squarelogo.png',
+  rahimafrooz: '/images/rahimafrooz-logo.png',
 }
 
 export const siteConfig = {

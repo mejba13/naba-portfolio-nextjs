@@ -185,19 +185,20 @@ export function About() {
               variants={itemVariants}
               className="sm:col-span-2 card-premium overflow-hidden group"
             >
-              <div className="relative h-64 sm:h-72">
+              <div className="relative h-56 xs:h-64 sm:h-72 md:h-80">
                 <Image
                   src={personalInfo.secondaryImage}
-                  alt={personalInfo.name}
+                  alt={`${personalInfo.name} - Professional portrait`}
                   fill
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <p className="text-white font-display text-xl font-semibold">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4">
+                  <p className="text-white font-display text-lg sm:text-xl lg:text-2xl">
                     {personalInfo.name}
                   </p>
-                  <p className="text-white/80 text-sm">{personalInfo.title}</p>
+                  <p className="text-white/80 text-xs sm:text-sm mt-0.5">{personalInfo.title}</p>
                 </div>
               </div>
             </motion.div>
@@ -207,25 +208,25 @@ export function About() {
               <motion.div
                 key={achievement.id}
                 variants={itemVariants}
-                className="card-premium p-5 hover:shadow-lg transition-all duration-300"
+                className="card-premium p-4 sm:p-5 hover:shadow-xl transition-all duration-500"
               >
                 <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
+                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-4 ${
                     index === 0
-                      ? 'bg-emerald-100 text-emerald-600'
+                      ? 'bg-emerald-50 text-emerald-600'
                       : index === 1
-                      ? 'bg-amber-100 text-amber-600'
+                      ? 'bg-amber-50 text-amber-600'
                       : index === 2
-                      ? 'bg-blue-100 text-blue-600'
-                      : 'bg-slate-100 text-slate-600'
+                      ? 'bg-blue-50 text-blue-600'
+                      : 'bg-slate-50 text-slate-600'
                   }`}
                 >
                   {iconMap[achievement.icon]}
                 </div>
-                <h3 className="font-semibold text-slate-900 mb-1">
+                <h3 className="font-semibold text-slate-900 text-sm sm:text-base mb-1">
                   {achievement.title}
                 </h3>
-                <p className="text-sm text-slate-600">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   {achievement.description}
                 </p>
               </motion.div>

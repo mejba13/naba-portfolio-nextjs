@@ -106,14 +106,14 @@ export function Hero() {
             </motion.div>
 
             {/* Name */}
-            <motion.h1 custom={1} variants={fadeInUp} className="mb-4" itemProp="name">
-              <span className="block text-slate-400 font-display text-2xl sm:text-3xl font-medium mb-2">
+            <motion.h1 custom={1} variants={fadeInUp} className="mb-4 sm:mb-6" itemProp="name">
+              <span className="block text-slate-500 font-sans text-base sm:text-lg lg:text-xl font-medium mb-3 sm:mb-4 tracking-normal">
                 Hello, I&apos;m
               </span>
-              <span className="heading-hero">
+              <span className="heading-hero block font-display">
                 {personalInfo.name.split(' ').slice(0, 2).join(' ')}
               </span>
-              <span className="block heading-hero text-gradient-gold mt-1">
+              <span className="heading-hero block text-gradient-gold mt-1 sm:mt-2 font-display">
                 {personalInfo.name.split(' ').slice(2).join(' ')}
               </span>
             </motion.h1>
@@ -127,7 +127,7 @@ export function Hero() {
             <motion.p
               custom={3}
               variants={fadeInUp}
-              className="font-display text-xl sm:text-2xl text-slate-700 mb-6"
+              className="font-display text-lg sm:text-xl lg:text-2xl xl:text-3xl text-slate-600 mb-4 sm:mb-6 font-medium"
               itemProp="jobTitle"
             >
               {personalInfo.title}
@@ -137,7 +137,7 @@ export function Hero() {
             <motion.p
               custom={4}
               variants={fadeInUp}
-              className="body-large max-w-xl mx-auto lg:mx-0 mb-8"
+              className="body-large max-w-xl mx-auto lg:mx-0 mb-6 sm:mb-8 text-balance"
               itemProp="description"
             >
               {personalInfo.shortBio}
@@ -180,18 +180,18 @@ export function Hero() {
             <motion.div
               custom={6}
               variants={fadeInUp}
-              className="flex items-center justify-center lg:justify-start gap-8 lg:gap-12"
+              className="flex items-center justify-center lg:justify-start gap-6 sm:gap-8 lg:gap-12"
             >
               {[
                 { value: '10+', label: 'Years Experience' },
                 { value: '4', label: 'Companies' },
                 { value: 'CIPS', label: 'Certified' },
-              ].map((stat, index) => (
+              ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <p className="font-display text-3xl sm:text-4xl font-semibold text-slate-900">
+                  <p className="font-display text-2xl sm:text-3xl lg:text-4xl text-slate-900 font-bold tracking-tight">
                     {stat.value}
                   </p>
-                  <p className="text-sm text-slate-500 mt-1">{stat.label}</p>
+                  <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">{stat.label}</p>
                 </div>
               ))}
             </motion.div>
@@ -206,7 +206,7 @@ export function Hero() {
           >
             <div className="relative">
               {/* Main Image Container */}
-              <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px]">
+              <div className="relative w-64 h-64 xs:w-72 xs:h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px]">
                 {/* Background Shapes */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-amber-100 to-amber-50 rounded-[2rem] rotate-6"
@@ -220,18 +220,18 @@ export function Hero() {
                 />
 
                 {/* Image */}
-                <div className="absolute inset-3 rounded-[1.5rem] overflow-hidden bg-slate-200">
+                <div className="absolute inset-2 sm:inset-3 rounded-2xl sm:rounded-[1.5rem] overflow-hidden bg-slate-100">
                   <Image
                     src={personalInfo.profileImage}
                     alt={`${personalInfo.name} - ${personalInfo.title} based in ${personalInfo.location}`}
                     fill
-                    className="object-cover object-center"
+                    className="object-cover object-center transition-transform duration-700 hover:scale-105"
                     priority
-                    sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 420px"
+                    sizes="(max-width: 475px) 256px, (max-width: 640px) 288px, (max-width: 768px) 320px, (max-width: 1024px) 384px, 450px"
                     itemProp="image"
                   />
                   {/* Subtle Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent pointer-events-none" />
                 </div>
               </div>
 
@@ -266,13 +266,13 @@ export function Hero() {
                 transition={{ delay: 1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="flex items-center gap-2 sm:gap-3">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-slate-900 flex items-center justify-center">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-white flex items-center justify-center overflow-hidden">
                     <Image
-                      src="/images/fervent-logo.svg"
+                      src="/images/fervent-main-logo.jpg"
                       alt="Fervent"
-                      width={24}
-                      height={24}
-                      className="brightness-0 invert w-4 h-4 sm:w-6 sm:h-6"
+                      width={32}
+                      height={32}
+                      className="w-7 h-7 sm:w-9 sm:h-9 object-contain"
                     />
                   </div>
                   <div>

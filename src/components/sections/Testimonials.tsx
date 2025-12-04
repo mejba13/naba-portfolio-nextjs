@@ -64,7 +64,7 @@ export function Testimonials() {
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-amber-400 mb-4">
             Recommendations
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-6">
             What Colleagues Say
           </h2>
           <p className="text-lg sm:text-xl text-slate-400 leading-relaxed">

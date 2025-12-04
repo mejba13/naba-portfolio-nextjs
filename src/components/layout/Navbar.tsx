@@ -79,10 +79,10 @@ export function Navbar() {
                 />
               </div>
               <div className="hidden sm:block">
-                <p className="font-semibold text-neutral-900 leading-tight">
+                <p className="font-display text-base lg:text-lg text-slate-900 leading-tight font-semibold tracking-tight">
                   Rabiul Islam
                 </p>
-                <p className="text-xs text-neutral-500">Naba</p>
+                <p className="text-xs text-amber-600 font-semibold tracking-normal">Naba</p>
               </div>
             </motion.a>
 

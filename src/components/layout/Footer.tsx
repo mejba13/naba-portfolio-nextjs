@@ -70,8 +70,8 @@ export function Footer() {
                   />
                 </div>
                 <div>
-                  <p className="font-semibold text-lg">{personalInfo.name}</p>
-                  <p className="text-sm text-neutral-400">{personalInfo.title}</p>
+                  <p className="font-display text-lg lg:text-xl font-semibold tracking-tight">{personalInfo.name}</p>
+                  <p className="text-xs sm:text-sm text-neutral-400 mt-0.5">{personalInfo.title}</p>
                 </div>
               </div>
               <p className="text-neutral-400 leading-relaxed max-w-md mb-6">

@@ -1,17 +1,20 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import '@/styles/globals.css'
 
+// Inter - Industry-standard body font (clean, highly readable)
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-sans',
   display: 'swap',
 })
 
-const playfair = Playfair_Display({
+// Space Grotesk - Modern geometric display font (bold, premium, tech-forward)
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-display',
   display: 'swap',
+  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -180,7 +183,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

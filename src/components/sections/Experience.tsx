@@ -87,17 +87,17 @@ export function Experience() {
                     {/* Company Header */}
                     <div className="flex flex-wrap items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
                       {/* Logo */}
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-100 flex items-center justify-center overflow-hidden flex-shrink-0">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl bg-white border border-slate-100 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-sm">
                         {roles[0].logo ? (
                           <Image
                             src={roles[0].logo}
                             alt={company}
-                            width={40}
-                            height={40}
-                            className="object-contain"
+                            width={56}
+                            height={56}
+                            className="object-contain w-9 h-9 sm:w-11 sm:h-11 lg:w-13 lg:h-13"
                           />
                         ) : (
-                          <span className="text-lg font-bold text-slate-400">
+                          <span className="text-base sm:text-lg font-bold text-slate-400">
                             {company.split(' ').map(w => w[0]).join('').slice(0, 2)}
                           </span>
                         )}
@@ -105,7 +105,7 @@ export function Experience() {
 
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-1">
-                          <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-semibold text-slate-900">
+                          <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 tracking-tight">
                             {company}
                           </h3>
                           {roles[0].current && (
