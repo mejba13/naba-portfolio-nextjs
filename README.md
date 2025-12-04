@@ -172,9 +172,58 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Rabiul Islam Naba**
 - Location: Dhaka, Bangladesh
-- LinkedIn: [Connect](https://linkedin.com/in/rabiulnaba)
-- Facebook: [Follow](https://facebook.com/rabiulnaba)
+- Email: [sourcing@ferventbd.com](mailto:sourcing@ferventbd.com)
+- LinkedIn: [Connect](https://www.linkedin.com/in/rabiul-islam-naba-2a97a99a/)
+- Facebook: [Follow](https://www.facebook.com/dewdrop08)
+- Company: [Fervent Multiboard Industries Ltd.](https://ferventbd.com/)
 
 ---
 
-Built with precision in Bangladesh
+## Developer
+
+<div align="center">
+  <img src="https://mejba.me/avatar.jpg" alt="Engr Mejba Ahmed" width="100" style="border-radius: 50%;" />
+
+  ### Engr Mejba Ahmed
+
+  **AI Developer | Software Engineer | Cloud DevOps Engineer**
+
+  B.Sc. in Computer Science & Engineering from [Daffodil International University](https://daffodilvarsity.edu.bd/)
+</div>
+
+#### About the Developer
+
+I'm a passionate Software Engineer, AI Developer, Cybersecurity Specialist, and Cloud DevOps Engineer. I build secure and scalable web solutions using Laravel, WordPress, Shopify, Python, and modern frameworks. I specialize in AWS, Docker, Kubernetes, CI/CD, and cybersecurity (OWASP, ethical hacking).
+
+I'm passionate about learning and innovation. I write technical articles to share knowledge, aiming to bridge technology and business through smart solutions in AI, automation, and security.
+
+#### Expertise
+
+| Domain | Technologies |
+|--------|-------------|
+| **AI Development** | Machine Learning & Automation |
+| **Software Engineering** | Full-Stack Development |
+| **Cloud DevOps** | AWS & Infrastructure |
+| **AI Solutions Studio** | Build • Automate • Scale |
+
+#### Services
+
+- **AI Systems** - Intelligent automation solutions
+- **Product Engineering** - End-to-end development
+- **Cloud Reliability** - Scalable infrastructure
+- **AI Agents** - Custom AI integrations
+
+#### Connect with the Developer
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/engr-mejba-ahmed-795ab3165/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mejba13)
+[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=x&logoColor=white)](https://x.com/mejba_92)
+[![Website](https://img.shields.io/badge/Website-mejba.me-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://mejba.me)
+
+---
+
+<div align="center">
+  <strong>Built with precision in Bangladesh</strong>
+  <br />
+  <sub>Developed by <a href="https://mejba.me">Engr Mejba Ahmed</a> | AI Solutions Studio</sub>
+</div>

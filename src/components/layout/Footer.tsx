@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { personalInfo, navLinks } from '@/data/portfolio'
+import Image from 'next/image'
+import { personalInfo, navLinks, siteConfig } from '@/data/portfolio'
 import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animations'
 
 const socialLinks = [
@@ -59,8 +60,14 @@ export function Footer() {
             {/* Brand Column */}
             <motion.div variants={staggerItem} className="lg:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center">
-                  <span className="text-neutral-900 font-bold text-xl">RN</span>
+                <div className="w-12 h-12 rounded-xl overflow-hidden">
+                  <Image
+                    src={siteConfig.logo}
+                    alt={personalInfo.name}
+                    width={48}
+                    height={48}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-lg">{personalInfo.name}</p>

@@ -20,6 +20,16 @@ const contactMethods = [
   {
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+      </svg>
+    ),
+    label: 'Phone / WhatsApp',
+    value: personalInfo.phone,
+    href: `tel:${personalInfo.phone.replace(/[^+\d]/g, '')}`,
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
@@ -102,7 +112,7 @@ export function Contact() {
           </motion.div>
 
           {/* Contact Methods */}
-          <motion.div variants={staggerContainer} className="space-y-4 mb-8">
+          <motion.div variants={staggerContainer} className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
             {contactMethods.map((method) => (
               <motion.a
                 key={method.label}
@@ -110,14 +120,16 @@ export function Contact() {
                 target={method.href.startsWith('http') ? '_blank' : undefined}
                 rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 variants={staggerItem}
-                className="flex items-center gap-4 p-4 bg-white rounded-xl border border-neutral-200 hover:border-neutral-300 hover:shadow-soft transition-all duration-200 group"
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white rounded-xl border border-neutral-200 hover:border-neutral-300 hover:shadow-soft transition-all duration-200 group"
               >
-                <div className="w-12 h-12 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-600 group-hover:bg-neutral-900 group-hover:text-white transition-all duration-200">
-                  {method.icon}
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-600 group-hover:bg-neutral-900 group-hover:text-white transition-all duration-200 flex-shrink-0">
+                  <span className="[&>svg]:w-5 [&>svg]:h-5 sm:[&>svg]:w-6 sm:[&>svg]:h-6">
+                    {method.icon}
+                  </span>
                 </div>
-                <div>
-                  <p className="text-sm text-neutral-500">{method.label}</p>
-                  <p className="font-medium text-neutral-900">{method.value}</p>
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-neutral-500">{method.label}</p>
+                  <p className="font-medium text-neutral-900 text-sm sm:text-base truncate">{method.value}</p>
                 </div>
               </motion.a>
             ))}
@@ -125,8 +137,8 @@ export function Contact() {
 
           {/* Social Links */}
           <motion.div variants={fadeInUp}>
-            <p className="text-sm text-neutral-500 mb-4">Follow on social media</p>
-            <div className="flex gap-3">
+            <p className="text-xs sm:text-sm text-neutral-500 mb-3 sm:mb-4">Follow on social media</p>
+            <div className="flex gap-2 sm:gap-3">
               {[
                 { name: 'LinkedIn', href: personalInfo.social.linkedin },
                 { name: 'Facebook', href: personalInfo.social.facebook },
@@ -137,7 +149,7 @@ export function Contact() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-white border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-neutral-900 hover:text-white hover:border-neutral-900 transition-all duration-200"
+                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-neutral-900 hover:text-white hover:border-neutral-900 transition-all duration-200"
                   aria-label={social.name}
                 >
                   {social.name === 'LinkedIn' && (

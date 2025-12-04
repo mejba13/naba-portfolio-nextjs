@@ -1,0 +1,27 @@
+{
+  "name": "Rabiul Islam Naba - Supply Chain & Procurement Specialist",
+  "short_name": "Naba Portfolio",
+  "description": "Professional portfolio of Rabiul Islam Naba, Head of Supply Chain at Fervent Multiboard Industries Ltd. Expert in supply chain management, procurement, and strategic sourcing in Bangladesh.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#171717",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["business", "portfolio", "professional"],
+  "icons": [
+    {
+      "src": "/images/favicon.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/favicon.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

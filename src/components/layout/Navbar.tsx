@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { navLinks, personalInfo } from '@/data/portfolio'
+import { navLinks, personalInfo, siteConfig } from '@/data/portfolio'
 import { Button } from '@/components/ui'
 import { fadeInDown, staggerContainer, staggerItem } from '@/lib/animations'
 
@@ -68,14 +69,20 @@ export function Navbar() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-neutral-900 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">RN</span>
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden">
+                <Image
+                  src={siteConfig.logo}
+                  alt={personalInfo.name}
+                  width={44}
+                  height={44}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="hidden sm:block">
                 <p className="font-semibold text-neutral-900 leading-tight">
-                  {personalInfo.name.split(' ')[0]}
+                  Rabiul Islam
                 </p>
-                <p className="text-xs text-neutral-500">Supply Chain Expert</p>
+                <p className="text-xs text-neutral-500">Naba</p>
               </div>
             </motion.a>
 

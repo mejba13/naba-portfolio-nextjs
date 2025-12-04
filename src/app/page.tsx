@@ -8,8 +8,10 @@ import {
   Experience,
   Skills,
   Education,
+  Testimonials,
   Contact,
 } from '@/components/sections'
+import { SEOSchema } from '@/components/SEOSchema'
 
 export default function Home() {
   return (
@@ -20,16 +22,20 @@ export default function Home() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
+        {/* SEO Structured Data */}
+        <SEOSchema />
+
         {/* Navigation */}
         <Navbar />
 
         {/* Main Content */}
-        <main>
+        <main role="main" itemScope itemType="https://schema.org/WebPage">
           <Hero />
           <About />
           <Experience />
           <Skills />
           <Education />
+          <Testimonials />
           <Contact />
         </main>
 

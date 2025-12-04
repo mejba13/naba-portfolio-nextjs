@@ -1,5 +1,67 @@
-# https://www.robotstxt.org/robotstxt.html
+# Robots.txt for Rabiul Islam Naba Portfolio
+# https://rabiulnaba.com
+
+# Allow all crawlers
 User-agent: *
 Allow: /
 
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yahoo
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# Facebook
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter
+User-agent: Twitterbot
+Allow: /
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+
+# Block sensitive paths (if any in future)
+Disallow: /api/
+Disallow: /_next/static/development/
+Disallow: /*.json$
+
+# Allow important files
+Allow: /manifest.json
+Allow: /sitemap.xml
+Allow: /images/
+
+# Sitemap location
 Sitemap: https://rabiulnaba.com/sitemap.xml
+
+# Host
+Host: https://rabiulnaba.com

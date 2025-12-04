@@ -16,53 +16,148 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://rabiulnaba.com'),
-  title: 'Rabiul Islam Naba | Head of Supply Chain & Procurement Specialist',
-  description:
-    'Rabiul Islam Naba is an accomplished supply chain and procurement leader with extensive experience across Bangladesh\'s manufacturing, energy, and technology sectors.',
+
+  // Favicon and Icons
+  icons: {
+    icon: [
+      { url: '/images/favicon.jpeg', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/images/favicon.jpeg', sizes: '16x16', type: 'image/jpeg' },
+    ],
+    apple: [
+      { url: '/images/favicon.jpeg', sizes: '180x180', type: 'image/jpeg' },
+    ],
+    shortcut: '/images/favicon.jpeg',
+  },
+
+  // Manifest for PWA
+  manifest: '/manifest.json',
+
+  // Primary Meta Tags
+  title: {
+    default: 'Rabiul Islam Naba | Head of Supply Chain & Procurement Specialist | Bangladesh',
+    template: '%s | Rabiul Islam Naba',
+  },
+  description: 'Rabiul Islam Naba is an accomplished supply chain and procurement leader with 10+ years of experience across Bangladesh\'s manufacturing, energy, and technology sectors. Currently Head of Supply Chain at Fervent Multiboard Industries Ltd. BUET graduate & CIPS certified professional.',
+
+  // Enhanced Keywords
   keywords: [
-    'Supply Chain',
-    'Procurement',
-    'Sourcing',
-    'Vendor Management',
-    'Operations',
-    'Bangladesh',
-    'BUET',
+    'Rabiul Islam Naba',
+    'Supply Chain Manager Bangladesh',
+    'Procurement Specialist Dhaka',
+    'Head of Supply Chain',
+    'Strategic Sourcing Expert',
+    'Vendor Management Professional',
+    'CIPS Certified',
+    'BUET Graduate',
     'Industrial Engineering',
+    'Fervent Multiboard Industries',
+    'Walton',
+    'Rahimafrooz',
+    'Supply Chain Leadership',
+    'Procurement Operations',
+    'Contract Negotiation',
+    'Logistics Management Bangladesh',
+    'Manufacturing Supply Chain',
+    'Construction Supply Chain',
   ],
-  authors: [{ name: 'Rabiul Islam Naba' }],
+
+  // Author Information
+  authors: [
+    { name: 'Rabiul Islam Naba', url: 'https://rabiulnaba.com' },
+  ],
   creator: 'Rabiul Islam Naba',
+  publisher: 'Rabiul Islam Naba',
+
+  // Category
+  category: 'Professional Portfolio',
+
+  // Canonical URL
+  alternates: {
+    canonical: 'https://rabiulnaba.com',
+    languages: {
+      'en-US': 'https://rabiulnaba.com',
+    },
+  },
+
+  // Open Graph
   openGraph: {
-    type: 'website',
+    type: 'profile',
     locale: 'en_US',
-    siteName: 'Rabiul Islam Naba Portfolio',
+    siteName: 'Rabiul Islam Naba - Professional Portfolio',
     title: 'Rabiul Islam Naba | Head of Supply Chain & Procurement Specialist',
-    description:
-      'Strategic supply chain leader driving operational excellence across manufacturing, energy, and technology sectors in Bangladesh.',
+    description: 'Strategic supply chain leader with 10+ years experience driving operational excellence across manufacturing, energy, and technology sectors in Bangladesh. BUET graduate & CIPS certified.',
+    url: 'https://rabiulnaba.com',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/images/naba-profile-image.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Rabiul Islam Naba - Supply Chain Expert',
+        alt: 'Rabiul Islam Naba - Head of Supply Chain & Procurement Specialist',
+        type: 'image/jpeg',
+      },
+      {
+        url: '/images/naba-me-second-image.jpg',
+        width: 800,
+        height: 600,
+        alt: 'Rabiul Islam Naba Professional Photo',
+        type: 'image/jpeg',
       },
     ],
+    firstName: 'Rabiul Islam',
+    lastName: 'Naba',
+    username: 'rabiulnaba',
+    gender: 'male',
   },
+
+  // Twitter Card
   twitter: {
     card: 'summary_large_image',
-    title: 'Rabiul Islam Naba | Supply Chain & Procurement Specialist',
-    description:
-      'Strategic supply chain leader driving operational excellence across manufacturing, energy, and technology sectors.',
-    images: ['/og-image.jpg'],
+    site: '@rabiulnaba',
+    creator: '@rabiulnaba',
+    title: 'Rabiul Islam Naba | Head of Supply Chain & Procurement Specialist',
+    description: 'Strategic supply chain leader with 10+ years experience. Head of Supply Chain at Fervent Multiboard Industries Ltd. BUET graduate & CIPS certified professional based in Dhaka, Bangladesh.',
+    images: {
+      url: '/images/naba-profile-image.jpeg',
+      alt: 'Rabiul Islam Naba - Supply Chain Expert',
+    },
   },
+
+  // Robots
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
+    },
+  },
+
+  // Verification (placeholders - update with actual values)
+  verification: {
+    google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code',
+    // bing: 'your-bing-verification-code',
+  },
+
+  // Other meta
+  applicationName: 'Rabiul Islam Naba Portfolio',
+  referrer: 'origin-when-cross-origin',
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: true,
+  },
+
+  // App Links
+  appLinks: {
+    web: {
+      url: 'https://rabiulnaba.com',
+      should_fallback: true,
     },
   },
 }
@@ -75,6 +170,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
+  userScalable: true,
+  colorScheme: 'light',
 }
 
 export default function RootLayout({
@@ -84,6 +181,49 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        {/* Preconnect to external domains for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* DNS Prefetch */}
+        <link rel="dns-prefetch" href="https://www.linkedin.com" />
+        <link rel="dns-prefetch" href="https://www.facebook.com" />
+
+        {/* Geographic Meta Tags */}
+        <meta name="geo.region" content="BD-C" />
+        <meta name="geo.placename" content="Dhaka, Bangladesh" />
+        <meta name="geo.position" content="23.8103;90.4125" />
+        <meta name="ICBM" content="23.8103, 90.4125" />
+
+        {/* Language and Content */}
+        <meta httpEquiv="content-language" content="en-US" />
+        <meta name="language" content="English" />
+
+        {/* Target Audience */}
+        <meta name="target" content="all" />
+        <meta name="audience" content="all" />
+        <meta name="coverage" content="Worldwide" />
+        <meta name="distribution" content="global" />
+        <meta name="rating" content="general" />
+
+        {/* Revisit */}
+        <meta name="revisit-after" content="7 days" />
+
+        {/* Author */}
+        <meta name="author" content="Rabiul Islam Naba" />
+        <meta name="designer" content="Engr Mejba Ahmed" />
+
+        {/* Classification */}
+        <meta name="classification" content="Business, Professional Portfolio, Supply Chain, Procurement" />
+        <meta name="subject" content="Professional Portfolio of Rabiul Islam Naba - Supply Chain & Procurement Expert" />
+
+        {/* Mobile Web App */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Naba Portfolio" />
+      </head>
       <body className="min-h-screen bg-white font-sans antialiased">
         {children}
       </body>

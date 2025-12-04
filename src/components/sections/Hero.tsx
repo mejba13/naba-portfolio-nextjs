@@ -1,16 +1,34 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { personalInfo } from '@/data/portfolio'
-import { Button } from '@/components/ui'
-import {
-  fadeInUp,
-  fadeInLeft,
-  fadeInRight,
-  staggerContainer,
-  staggerItem,
-  float,
-} from '@/lib/animations'
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      delay: i * 0.1,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  }),
+}
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 1,
+      delay: 0.3,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+}
 
 export function Hero() {
   const handleScroll = (href: string) => {
@@ -23,242 +41,262 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-neutral-50 via-white to-white"
+      aria-label="Hero section - Introduction"
+      itemScope
+      itemType="https://schema.org/Person"
+      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50"
     >
-      {/* Background Elements */}
+      {/* Background Pattern */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+        {/* Subtle Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23000' stroke-width='0.5'%3E%3Cpath d='M0 0h60v60H0z'/%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        />
 
         {/* Gradient Orbs */}
         <motion.div
-          className="absolute top-1/4 -left-20 w-96 h-96 bg-primary-200/30 rounded-full blur-3xl"
+          className="absolute top-1/4 -left-32 w-[500px] h-[500px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%)',
+          }}
           animate={{
-            x: [0, 30, 0],
-            y: [0, -20, 0],
+            x: [0, 20, 0],
+            y: [0, -30, 0],
           }}
           transition={{
-            duration: 8,
+            duration: 15,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
         />
         <motion.div
-          className="absolute bottom-1/4 -right-20 w-80 h-80 bg-neutral-200/50 rounded-full blur-3xl"
+          className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(100,116,139,0.06) 0%, transparent 70%)',
+          }}
           animate={{
-            x: [0, -30, 0],
+            x: [0, -20, 0],
             y: [0, 20, 0],
           }}
           transition={{
-            duration: 10,
+            duration: 18,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
         />
-
-        {/* Decorative Lines */}
-        <svg
-          className="absolute top-0 left-0 w-full h-full opacity-[0.03]"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern
-              id="grid"
-              width="60"
-              height="60"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M 60 0 L 0 0 0 60"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
       </div>
 
-      <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl w-full py-20 sm:py-24 lg:py-28">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 container-custom w-full py-24 sm:py-28 lg:py-32">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
           <motion.div
             className="text-center lg:text-left order-2 lg:order-1"
             initial="hidden"
             animate="visible"
-            variants={staggerContainer}
           >
-            {/* Badge */}
-            <motion.div variants={fadeInUp} className="mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 text-neutral-700 text-sm font-medium">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                Open to Strategic Opportunities
+            {/* Editorial Label */}
+            <motion.div custom={0} variants={fadeInUp} className="mb-6">
+              <span className="label-editorial">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Available for Strategic Opportunities
               </span>
             </motion.div>
 
-            {/* Heading */}
-            <motion.h1
-              variants={fadeInUp}
-              className="text-display-lg sm:text-display-xl lg:text-display-2xl font-display font-bold tracking-tight text-neutral-900 mb-6"
-            >
-              <span className="block">Hi, I&apos;m</span>
-              <span className="block text-gradient">{personalInfo.name}</span>
+            {/* Name */}
+            <motion.h1 custom={1} variants={fadeInUp} className="mb-4" itemProp="name">
+              <span className="block text-slate-400 font-display text-2xl sm:text-3xl font-medium mb-2">
+                Hello, I&apos;m
+              </span>
+              <span className="heading-hero">
+                {personalInfo.name.split(' ').slice(0, 2).join(' ')}
+              </span>
+              <span className="block heading-hero text-gradient-gold mt-1">
+                {personalInfo.name.split(' ').slice(2).join(' ')}
+              </span>
             </motion.h1>
+
+            {/* Divider */}
+            <motion.div custom={2} variants={fadeInUp} className="flex justify-center lg:justify-start my-6">
+              <div className="divider-gold" />
+            </motion.div>
 
             {/* Title */}
             <motion.p
+              custom={3}
               variants={fadeInUp}
-              className="text-xl sm:text-2xl font-medium text-neutral-700 mb-4"
+              className="font-display text-xl sm:text-2xl text-slate-700 mb-6"
+              itemProp="jobTitle"
             >
               {personalInfo.title}
             </motion.p>
 
             {/* Description */}
             <motion.p
+              custom={4}
               variants={fadeInUp}
-              className="text-lg text-neutral-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0"
+              className="body-large max-w-xl mx-auto lg:mx-0 mb-8"
+              itemProp="description"
             >
               {personalInfo.shortBio}
             </motion.p>
 
             {/* CTAs */}
             <motion.div
+              custom={5}
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
             >
-              <Button
-                variant="primary"
-                size="lg"
+              <button
                 onClick={() => handleScroll('#contact')}
-                rightIcon={
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                }
+                className="btn-primary group"
               >
-                Get in Touch
-              </Button>
-              <Button
-                variant="secondary"
-                size="lg"
+                <span>Get in Touch</span>
+                <svg
+                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </button>
+              <button
                 onClick={() => handleScroll('#experience')}
+                className="btn-secondary"
               >
                 View Experience
-              </Button>
+              </button>
             </motion.div>
 
             {/* Stats */}
             <motion.div
+              custom={6}
               variants={fadeInUp}
-              className="flex items-center justify-center lg:justify-start gap-8 mt-12 pt-8 border-t border-neutral-200"
+              className="flex items-center justify-center lg:justify-start gap-8 lg:gap-12"
             >
               {[
                 { value: '10+', label: 'Years Experience' },
-                { value: '100+', label: 'Vendor Relationships' },
-                { value: '3', label: 'Industry Sectors' },
-              ].map((stat) => (
+                { value: '4', label: 'Companies' },
+                { value: 'CIPS', label: 'Certified' },
+              ].map((stat, index) => (
                 <div key={stat.label} className="text-center">
-                  <p className="text-2xl sm:text-3xl font-bold text-neutral-900">
+                  <p className="font-display text-3xl sm:text-4xl font-semibold text-slate-900">
                     {stat.value}
                   </p>
-                  <p className="text-sm text-neutral-500">{stat.label}</p>
+                  <p className="text-sm text-slate-500 mt-1">{stat.label}</p>
                 </div>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* Image/Visual */}
+          {/* Image */}
           <motion.div
-            className="relative order-1 lg:order-2 flex justify-center"
+            className="relative order-1 lg:order-2 flex justify-center lg:justify-end"
+            variants={scaleIn}
             initial="hidden"
             animate="visible"
-            variants={fadeInRight}
           >
             <div className="relative">
               {/* Main Image Container */}
-              <motion.div
-                className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96"
-                variants={float}
-                animate="animate"
-              >
-                {/* Background Shape */}
-                <div className="absolute inset-0 bg-gradient-to-br from-neutral-200 to-neutral-100 rounded-[2.5rem] rotate-6" />
-                <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 to-white rounded-[2.5rem] -rotate-3 shadow-soft-xl" />
+              <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px]">
+                {/* Background Shapes */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-amber-100 to-amber-50 rounded-[2rem] rotate-6"
+                  animate={{ rotate: [6, 8, 6] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-slate-100 to-white rounded-[2rem] -rotate-3 shadow-2xl shadow-slate-200/50"
+                  animate={{ rotate: [-3, -5, -3] }}
+                  transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+                />
 
-                {/* Image Placeholder */}
-                <div className="absolute inset-4 bg-gradient-to-br from-neutral-300 to-neutral-200 rounded-[2rem] overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto bg-neutral-400 rounded-full flex items-center justify-center mb-4">
-                        <span className="text-4xl sm:text-5xl font-bold text-white">
-                          RN
-                        </span>
-                      </div>
-                      <p className="text-neutral-600 font-medium">
-                        {personalInfo.name.split(' ')[0]}
-                      </p>
-                    </div>
+                {/* Image */}
+                <div className="absolute inset-3 rounded-[1.5rem] overflow-hidden bg-slate-200">
+                  <Image
+                    src={personalInfo.profileImage}
+                    alt={`${personalInfo.name} - ${personalInfo.title} based in ${personalInfo.location}`}
+                    fill
+                    className="object-cover object-center"
+                    priority
+                    sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 420px"
+                    itemProp="image"
+                  />
+                  {/* Subtle Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent" />
+                </div>
+              </div>
+
+              {/* Floating Cards - Hidden on very small screens, shown from sm breakpoint */}
+              <motion.div
+                className="hidden sm:block absolute -top-2 -right-2 sm:-top-4 sm:-right-4 lg:-right-8 px-3 py-2 sm:px-4 sm:py-3 bg-white rounded-xl shadow-xl shadow-slate-200/50 border border-slate-100"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-amber-50 flex items-center justify-center">
+                    <Image
+                      src="/images/buet-logo.jpeg"
+                      alt="BUET"
+                      width={28}
+                      height={28}
+                      className="rounded w-5 h-5 sm:w-7 sm:h-7"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xs sm:text-sm font-semibold text-slate-900">BUET Graduate</p>
+                    <p className="text-[10px] sm:text-xs text-slate-500">Industrial Engineering</p>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Floating Elements */}
               <motion.div
-                className="absolute -top-4 -right-4 px-4 py-2 bg-white rounded-xl shadow-soft-lg border border-neutral-100"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5, duration: 0.4 }}
+                className="hidden sm:block absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 lg:-left-8 px-3 py-2 sm:px-4 sm:py-3 bg-white rounded-xl shadow-xl shadow-slate-200/50 border border-slate-100"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="flex items-center gap-2">
-                  <svg
-                    className="w-5 h-5 text-emerald-500"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-slate-900 flex items-center justify-center">
+                    <Image
+                      src="/images/fervent-logo.svg"
+                      alt="Fervent"
+                      width={24}
+                      height={24}
+                      className="brightness-0 invert w-4 h-4 sm:w-6 sm:h-6"
                     />
-                  </svg>
-                  <span className="text-sm font-medium text-neutral-700">BUET Graduate</span>
+                  </div>
+                  <div>
+                    <p className="text-xs sm:text-sm font-semibold text-slate-900">Head of Supply Chain</p>
+                    <p className="text-[10px] sm:text-xs text-slate-500">Fervent Multiboard</p>
+                  </div>
                 </div>
               </motion.div>
 
               <motion.div
-                className="absolute -bottom-4 -left-4 px-4 py-2 bg-white rounded-xl shadow-soft-lg border border-neutral-100"
+                className="hidden md:flex absolute top-1/2 -right-4 lg:-right-12 -translate-y-1/2 px-2 py-1.5 sm:px-3 sm:py-2 bg-emerald-500 rounded-lg shadow-lg shadow-emerald-500/30"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.7, duration: 0.4 }}
+                transition={{ delay: 1.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="flex items-center gap-2">
-                  <svg
-                    className="w-5 h-5 text-primary-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <span className="text-sm font-medium text-neutral-700">
-                    Head of Supply Chain
-                  </span>
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <Image
+                    src="/images/cips-logo.jpeg"
+                    alt="CIPS"
+                    width={20}
+                    height={20}
+                    className="rounded w-4 h-4 sm:w-5 sm:h-5"
+                  />
+                  <span className="text-[10px] sm:text-xs font-semibold text-white">CIPS Certified</span>
                 </div>
               </motion.div>
             </div>
@@ -271,15 +309,15 @@ export function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.5 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
       >
         <motion.button
           onClick={() => handleScroll('#about')}
-          className="flex flex-col items-center gap-2 text-neutral-400 hover:text-neutral-600 transition-colors"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <span className="text-xs font-medium uppercase tracking-wider">Scroll</span>
+          <span className="text-xs font-medium uppercase tracking-widest">Scroll</span>
           <svg
             className="w-5 h-5"
             fill="none"
@@ -289,7 +327,7 @@ export function Hero() {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
+              strokeWidth={1.5}
               d="M19 14l-7 7m0 0l-7-7m7 7V3"
             />
           </svg>
