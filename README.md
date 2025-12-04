@@ -2,6 +2,9 @@
 
 A modern, enterprise-quality personal portfolio website built with Next.js 14, Tailwind CSS, and Framer Motion.
 
+<img width="1949" height="1417" alt="hero-section" src="https://github.com/user-attachments/assets/ab029dc4-18ae-4798-832e-5ae45c91ff37" />
+
+
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=flat-square&logo=tailwindcss)
