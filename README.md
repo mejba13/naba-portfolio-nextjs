@@ -185,7 +185,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ## Developer
 
 <div align="center">
-  <img src="https://mejba.me/avatar.jpg" alt="Engr Mejba Ahmed" width="100" style="border-radius: 50%;" />
+  <img width="380" height="420" alt="engr-mejba-ahmed-optimize" src="https://github.com/user-attachments/assets/f74be331-0f4a-45b2-9752-8275091126cb" />
 
   ### Engr Mejba Ahmed
 
